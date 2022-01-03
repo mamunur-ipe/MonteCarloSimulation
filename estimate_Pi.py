@@ -6,21 +6,28 @@ import numpy as np
 
 def calculatePi(sample_points = 1000):
     X = np.random.uniform(low=-1, high=1, size=(sample_points,))
-    Y = np.random.uniform(low=-1, high=1, size=(sample_points,))
-    
+    Y = np.random.uniform(low=-1, high=1, size=(sample_points,))    
     inside_circle = 0
     for x, y in zip(X, Y):
         # Checking if (x, y) lies inside the circle
         r = np.hypot(x,y)
         if r <= 1.0:
-            inside_circle += 1
-            
-    pi = 4 * inside_circle / sample_points
-    
+            inside_circle += 1            
+    pi = 4 * inside_circle / sample_points    
     return pi, X, Y
 
 
- 
+def monteCarloSimulation(number_of_runs):
+    pi_values = []
+    for i in range(number_of_runs):
+        pi, X, Y = calculatePi()
+        pi_values.append(pi)
+        pi_average = sum(pi_values) / len(pi_values)        
+        # createPlot(X, Y, iteration = i+1, current_pi = pi, avg_pi = pi_average, pi_values = pi_values)
+        print(f'Iteration: {i+1} Average Pi: {pi_average}')        
+    return pi_average
+
+
 # def createPlot(X, Y, iteration, current_pi, avg_pi, pi_values):
 #     fig = plt.figure(constrained_layout=True, figsize=(10, 5))    
 #     gs = GridSpec(4, 2, figure=fig)
@@ -59,30 +66,8 @@ def calculatePi(sample_points = 1000):
 #     ax2.set_ylabel('Frequency')
     
 #     fig.savefig(f"pi_{iteration}.png", dpi=100, bbox_inches='tight')
-    
-
-
-def monteCarloSimulation(number_of_runs):
-    pi_values = []
-    for i in range(number_of_runs):
-        pi, X, Y = calculatePi()
-        pi_values.append(pi)
-        pi_average = sum(pi_values) / len(pi_values)        
-        # createPlot(X, Y, iteration = i+1, current_pi = pi, avg_pi = pi_average, pi_values = pi_values)
-        print(f'Iteration: {i+1} Average Pi: {pi_average}')
-        
-    return pi_average
-
 
 if __name__ == "__main__":
     pi_avg = monteCarloSimulation(number_of_runs = 10000)    
     print(f'Estimated pi: {pi_avg}')
-
-
-
-
-
-
-
-
-
+    
