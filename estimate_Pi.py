@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan  3 01:26:13 2022
-
-@author: user
-"""
-
 import numpy as np
 # import matplotlib.pyplot as plt
 # from matplotlib.gridspec import GridSpec
